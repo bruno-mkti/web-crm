@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRM de Prospecção</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<aside class="side">
+  <h1>Prospecta</h1>
+  <nav id="nav">
+    <button data-v="dashboard" class="on">Dashboard</button>
+    <button data-v="buscar">Buscar empresas</button>
+    <button data-v="contatos">Contatos</button>
+    <button data-v="kanban">Kanban</button>
+    <button data-v="config">Configurações</button>
+  </nav>
+</aside>
+<main>
+<section id="v-dashboard" class="view on">
+  <h2>Dashboard</h2>
+  <div id="kpis" class="kpis"></div>
+  <div class="grid2">
+    <div class="panel"><h3>Funil de vendas</h3><div id="funnel"></div></div>
+    <div class="panel"><h3>Leads por pesquisa</h3><div id="bySearch"></div></div>
+  </div>
+  <div class="grid2">
+    <div class="panel"><h3>Novos contatos (14 dias)</h3><div id="daily" class="daily"></div></div>
+    <div class="panel"><h3>Atividade recente</h3><div id="recent"></div></div>
+  </div>
+</section>
+
+<section id="v-buscar" class="view">
+  <h2>Buscar empresas no Google Maps</h2>
+  <div class="bar">
+    <input id="s-seg" placeholder="Segmento (ex.: academias)">
+    <input id="s-cid" placeholder="Cidade (ex.: Uberlândia, MG)">
+    <select id="s-max"><option value="20">20 resultados</option><option value="40">40 resultados</option><option value="60">60 resultados</option></select>
+    <button id="s-go" class="p">Pesquisar</button>
+  </div>
+  <div id="s-status" class="muted"></div>
+  <div id="s-tools" class="bar" hidden>
+    <label><input type="checkbox" id="s-all"> Selecionar todos</label>
+    <label><input type="checkbox" id="s-kb" checked> Enviar ao Kanban</label>
+    <button id="s-imp" class="p">Importar selecionados</button>
+  </div>
+  <div id="s-res" class="results"></div>
+</section>
+
+<section id="v-contatos" class="view">
+  <h2>Contatos <span id="c-count" class="muted"></span></h2>
+  <div class="bar">
+    <input id="c-q" placeholder="Filtrar por nome, telefone, endereço…">
+    <select id="c-seg"></select>
+    <button id="c-kball">Enviar filtrados ao Kanban</button>
+    <button id="c-new">+ Novo contato</button>
+    <button id="c-csv">Exportar CSV</button>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Empresa</th><th>Contato</th><th>Pesquisa</th><th>Etapa</th><th></th></tr></thead>
+    <tbody id="c-body"></tbody>
+  </table></div>
+</section>
+
+<section id="v-kanban" class="view">
+  <h2>Kanban</h2>
+  <div class="bar"><select id="k-seg"></select><input id="k-q" placeholder="Filtrar…"></div>
+  <div id="board" class="board"></div>
+</section>
+
+<section id="v-config" class="view">
+  <h2>Configurações</h2>
+  <div class="panel narrow">
+    <h3>Google Places API</h3>
+    <p class="muted">Crie uma chave no Google Cloud, ative a "Places API (New)" e cole aqui. Ela fica salva só no seu navegador.</p>
+    <input id="cfg-key" type="password" placeholder="Chave de API" autocomplete="off">
+    <div class="bar"><button id="cfg-save" class="p">Salvar chave</button></div>
+  </div>
+  <div class="panel narrow">
+    <h3>Dados</h3>
+    <div class="bar">
+      <button id="cfg-exp">Exportar backup (JSON)</button>
+      <button id="cfg-imp">Restaurar backup</button>
+      <button id="cfg-clr">Apagar tudo</button>
+      <input id="cfg-file" type="file" accept=".json" hidden>
+    </div>
+  </div>
+</section>
+</main>
+
+<dialog id="dl">
+  <h3 id="dt">Contato</h3>
+  <label>Empresa<input id="f-nome"></label>
+  <label>Telefone<input id="f-tel"></label>
+  <label>Endereço<input id="f-end"></label>
+  <label>Site<input id="f-site"></label>
+  <label>Notas<textarea id="f-nota" rows="3"></textarea></label>
+  <div class="bar end"><button id="f-cancel">Cancelar</button><button id="f-save" class="p">Salvar</button></div>
+</dialog>
+
+<script src="js/storage.js"></script>
+<script src="js/search.js"></script>
+<script src="js/contacts.js"></script>
+<script src="js/kanban.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
